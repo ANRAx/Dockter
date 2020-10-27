@@ -1,14 +1,4 @@
-/* eslint-disable */
-// const { ipcMain } = require('electron');
-// const sqlite3 = require('sqlite3').verbose();
-// const db = new sqlite3.Database('./mock.sqlite3');
 
-// SELECT l._id, l.message, l.timestamp, l.log_level, l.stream, l.container_id, c.name as container_name, c.image as container_image, c.status as container_status, c.host_ip, c.host_port
-// FROM logs l
-// INNER JOIN containers c
-// ON l.container_id = c.container_id;
-
-// TODO: import db instance
 
 ipcMain.on('filter', (event, arg) => {
   const filterProps = [];
@@ -36,7 +26,7 @@ ipcMain.on('filter', (event, arg) => {
 
     singleValueQuery.run(key, argKey);
     singlePropObj[key] = singleValueQuery;
-    event.returnValue([singlePropObj]);
+    event.returnValue = singlePropObj;
   } else {
     let filterParams = '';
     const multiPropObj = {};
@@ -56,7 +46,7 @@ ipcMain.on('filter', (event, arg) => {
     }
 
     multiValueQuery.run(filterParams);
-    event.returnValue([multiPropObj]);
+    event.returnValue = multiValueQuery;
   }
 
   // event.returnValue([
