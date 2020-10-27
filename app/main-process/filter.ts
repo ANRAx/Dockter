@@ -1,4 +1,4 @@
-
+import { db } from './db.ts';
 
 ipcMain.on('filter', (event, arg) => {
   const filterProps = [];
